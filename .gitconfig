@@ -1,0 +1,32 @@
+[core]
+	editor = emacs
+	page = "lv -c"
+
+[user]
+	name = Toru Tamura
+	email = torut@ttsoft.jp
+
+[alias]
+	br = branch
+	co = checkout
+	ci = commit
+	st = status -sb
+	di = diff
+	di-cached = diff --cached
+	ps = push
+	pl = pull
+	history = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %cn %Cred%d %Creset%s'
+	export = archive --format=tar HEAD
+	cherry-pick = cherry-pick --no-commit
+	svn-up = svn rebase
+	svn-commit = svn dcommit
+	svn-ci = svn dcommit
+
+[http]
+	sslVerify = false
+
+[color]
+	ui = auto
+
+[pull]
+	rebase = true

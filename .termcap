@@ -1,0 +1,1 @@
+xterm-256color:Co#256:AF=\E[38;5;%p1%dm:AB=\E[48;5;%p1%dm:tc=xterm-xfree86:
