@@ -70,6 +70,7 @@
 ;; line number
 (line-number-mode t)
 (column-number-mode t)
+(setq linum-format "%4d ")
 
 ;; dired
 (setq ls-lisp-dirs-first t)
