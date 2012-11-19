@@ -2,7 +2,6 @@
 
 (require 'color-theme)
 (load "./themes/color-theme-library.el")
-;;(color-theme-dark-green)
 (color-theme-charcoal-black)
 (global-font-lock-mode t)
 
@@ -101,6 +100,25 @@
 (setq-default tab-width 4)
 ;; (setq-default indent-tabs-mode nil)
 (setq-default c-basic-offset 4)
+
+;; diff-mode
+(defun diff-mode-setup-faces ()
+  (set-face-attribute 'diff-added nil
+					  :foreground "white" :background "dark green")
+  (set-face-attribute 'diff-removed nil
+					  :foreground "white" :background "red")
+)
+(add-hook 'diff-mode-hook 'diff-mode-setup-faces)
+
+(defun magit-setup-diff ()
+  ;; 'allではなくtにすると現在選択中のhunkのみ強調表示する
+  (setq magit-diff-refine-hunk 't)
+  ;; diff用のfaceを設定する
+  (diff-mode-setup-faces)
+  ;; diffの表示設定が上書きされてしまうのでハイライトを無効にする
+  (set-face-attribute 'magit-item-highlight nil :inherit nil)
+)
+(add-hook 'magit-mode-hook 'magit-setup-diff)
 
 
 ;; physical line
