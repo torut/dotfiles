@@ -17,6 +17,8 @@
 	pl = pull
 	history = log --graph --date=short --decorate=short --pretty=format:'%x09%Cgreen%h %Creset%cd %cn %Cred%d %Creset%s'
 	h = log --graph --date=short --decorate=short --pretty=format:'%x09%Cgreen%h %Creset%cd %cn %Cred%d %Creset%s'
+	history-stat = log --graph --decorate --pretty=format:\"%ad [%cn] <%h> %n %Cgreen%d%Creset %s %n\" --stat
+	h-stat = log --graph --decorate --pretty=format:\"%ad [%cn] <%h> %n %Cgreen%d%Creset %s %n\" --stat
 	export = archive --format=tar HEAD
 	cherry-pick = cherry-pick --no-commit
 	svn-up = svn rebase
