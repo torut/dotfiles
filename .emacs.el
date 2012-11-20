@@ -85,6 +85,9 @@
 
 ;; backup files
 (setq auto-save-default nil)
+(setq auto-save-file-name-transforms
+      `((".*" ,(expand-file-name "~/backup/emacs/") t)))
+
 (setq make-backup-files t)
 (setq backup-directory-alist
       (cons (cons "\\.*$" (expand-file-name "~/backup/emacs"))
