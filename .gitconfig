@@ -15,25 +15,33 @@
 	di-cached = diff --cached
 	ps = push
 	pl = pull
-	history = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %cn %Cred%d %Creset%s'
-	h = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %cn %Cred%d %Creset%s'
+	history = log --graph --date=short --decorate=short --pretty=format:'%x09%Cgreen%h %Creset%cd %cn %Cred%d %Creset%s'
+	h = log --graph --date=short --decorate=short --pretty=format:'%x09%Cgreen%h %Creset%cd %cn %Cred%d %Creset%s'
 	export = archive --format=tar HEAD
 	cherry-pick = cherry-pick --no-commit
 	svn-up = svn rebase
 	svn-commit = svn dcommit
 	svn-ci = svn dcommit
 	l = log --date=iso --format=medium
-	ls = log --name-status
+	ls = log --name-statu
+	lstat = log --stat
 	develop = checkout develop
 	master = checkout master
 	add-update = add -u
 	s = show
+	ad = add
+	up = pull --rebase
 
 [http]
 	sslVerify = false
 
 [color]
 	ui = auto
+	status = auto
+	diff = auto
+	branch = auto
+	interactive = auto
+	grep = auto
 
 [pull]
 	rebase = true
