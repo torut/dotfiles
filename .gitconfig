@@ -23,7 +23,7 @@
 	svn-commit = svn dcommit
 	svn-ci = svn dcommit
 	l = log --date=iso --format=medium
-	ls = log --name-statu
+	ls = log --name-status
 	lstat = log --stat
 	develop = checkout develop
 	master = checkout master
