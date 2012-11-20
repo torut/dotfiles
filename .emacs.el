@@ -37,7 +37,6 @@
 (setq default-buffer-file-coding-system 'utf-8)
 (prefer-coding-system 'utf-8-unix)
 
-
 ;; Anthy
 (push "/usr/local/share/emacs/site-lisp/anthy/" load-path)
 (load-library "anthy")
@@ -67,9 +66,22 @@
 (setq auto-fill-mode t)
 
 ;; line number
+(require 'linum)
+(global-linum-mode)
 (line-number-mode t)
 (column-number-mode t)
 (setq linum-format "%4d ")
+
+;; line, column number on status bar
+(line-number-mode t)
+(column-number-mode t)
+
+;; emphasis line end white space
+(setq-default show-trailing-whitespace t)
+(set-face-background 'trailing-whitespace "#990000")
+
+;; [yes or no] -> [y or n]
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; dired
 (setq ls-lisp-dirs-first t)
@@ -170,10 +182,8 @@
       (append '(("\\.rb$" . ruby-mode)) auto-mode-alist))
 (setq interpreter-mode-alist (append '(("ruby" . ruby-mode))
                                      interpreter-mode-alist))
-(autoload 'run-ruby "inf-ruby"
-  "Run an inferior Ruby process")
-(autoload 'inf-ruby-keys "inf-ruby"
-  "Set local key defs for inf-ruby in ruby-mode")
+(autoload 'run-ruby "inf-ruby" "Run an inferior Ruby process")
+(autoload 'inf-ruby-keys "inf-ruby" "Set local key defs for inf-ruby in ruby-mode")
 (add-hook 'ruby-mode-hook
           '(lambda ()
              (inf-ruby-keys)))
@@ -186,14 +196,12 @@
 (setq auto-mode-alist  (cons '("\\.rhtml$" . html-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.erb$" . html-mode) auto-mode-alist))
 
-
 ;; CSS
 (autoload 'css-mode "css-mode")
 (setq auto-mode-alist (cons '("\\.css$" . css-mode) auto-mode-alist))
 (setq cssm-indent-level 4)
 (setq cssm-newline-before-closing-bracket t)
 (setq cssm-indent-function #'cssm-c-style-indenter)
-
 
 ;; PHP
 ;;(load-library "php-mode")
@@ -219,7 +227,6 @@
 ;;
 (setq auto-coding-functions nil)
 
-
 ;; svn
 ;;(require 'psvn)
 (autoload 'svn-status "dsvn" "Run `svn status'." t)
@@ -235,11 +242,9 @@
 ;; grep-find
 (setq grep-find-command "find . -type f ! -path '*.svn*' ! -path '*.log*' ! -path '*.git*' -exec grep -nH -e  {} /dev/null \\;")
 
-
 ;; moccur
 (require 'color-moccur)
 (require 'moccur-edit)
-
 
 (setq inhibit-startup-message t)
 (setq next-line-add-newlines nil)
@@ -251,11 +256,6 @@
 	(lambda ()
 ;;		(setq indent-tabs-mode nil)
 		(setq c-basic-offset 4)))
-
-;; show line number for left side
-(require 'linum)
-(global-linum-mode)
-
 
 ;; move screen lines
 (defun screen-column ()
@@ -269,13 +269,13 @@
   "move beginning of screen line"
   (interactive)
   (vertical-motion 0))
- 
+
 (defun move-end-of-screen-line ()
   "move end of screen line"
   (interactive)
   (vertical-motion 1)
   (backward-char 1))
- 
+
 (defun next-screen-line ()
   "next screen line"
   (interactive)
@@ -285,7 +285,7 @@
         (setq keep-screen-column (screen-column)))
     (vertical-motion 1)
     (move-to-column (+ (current-column) keep-screen-column))))
- 
+
 (defun previous-screen-line ()
   "previous screen line"
   (interactive)
