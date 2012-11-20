@@ -26,6 +26,8 @@
 	ls = log --name-status
 	develop = checkout develop
 	master = checkout master
+	add-update = add -u
+	s = show
 
 [http]
 	sslVerify = false
