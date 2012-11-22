@@ -15,10 +15,10 @@
 	di-cached = diff --cached
 	ps = push
 	pl = pull
-	history = log --graph --date=short --decorate=short --pretty=format:'%x09%Cgreen%h %Creset%C(cyan)%cd %Creset%cn %Cred%d %Creset%C(white bold)%s'
-	h = log --graph --date=short --decorate=short --pretty=format:'%x09%Cgreen%h %Creset%C(cyan)%cd %Creset%cn %Cred%d %Creset%C(white bold)%s'
-	history-stat = log --graph --decorate --pretty=format:'%C(cyan)%ad %Creset[%cn] %Cgreen<%h>%Creset%n%Cred%d%Creset%n%C(white bold)%s%Creset%n' --stat
-	hs = log --graph --decorate --pretty=format:'%C(cyan)%ad %Creset[%cn] %Cgreen<%h>%Creset%n%Cred%d%Creset%n%C(white bold)%s%Creset%n' --stat
+	history = log --graph --date=short --pretty=format:'%C(green)%h%C(reset) %C(cyan)%cd%C(reset) %cn %C(red)%d%C(reset) %C(white bold)%s%C(reset)'
+	history-stat = log --graph --pretty=format:'%C(cyan)%ad%C(reset) %C(magenta)%cn%C(reset) %C(green)%h%C(reset)%n%C(red)%d%C(reset)%n%C(white bold)%s%C(reset)%n' --stat
+	h  = !git history
+	hs = !git history-stat
 	export = archive --format=tar HEAD
 	cherry-pick = cherry-pick --no-commit
 	svn-up = svn rebase
