@@ -28,12 +28,15 @@
 	hs = !git history-stat
 	export = archive --format=tar HEAD
 	cherry-pick = cherry-pick --no-commit
-	svn-up = svn rebase
-	svn-commit = svn dcommit
-	svn-ci = svn dcommit
 	lstat = log --stat
 	develop = checkout develop
 	master = checkout master
+	svn-up = svn rebase
+	svn-commit = svn dcommit
+	svn-ci = !git svn-commit
+	svn-info = svn info
+	svn-co = svn clone
+	svn-log = svn log
 
 [http]
 	sslVerify = false
