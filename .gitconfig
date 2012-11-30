@@ -37,6 +37,7 @@
 	svn-info = svn info
 	svn-co = svn clone
 	svn-log = svn log
+	gr = grep -H --heading --break --line-number
 
 [http]
 	sslVerify = false
