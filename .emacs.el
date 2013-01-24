@@ -113,7 +113,7 @@
 
 ;; Tabs
 (setq-default tab-width 4)
-;; (setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 (setq-default c-basic-offset 4)
 
 ;; diff-mode
@@ -208,12 +208,21 @@
 (autoload 'php-mode "php-mode" "Major mode for editing php code." t)
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
 (add-hook 'php-mode-user-hook
-  (lambda ()
+  '(lambda ()
     (setq tab-width 4)
     (setq c-basic-offset 4)
-    ;; (setq indent-tabs-mode nil)
+    (setq indent-tabs-mode nil)
   )
 )
+(add-hook 'php-mode-hook
+  '(lambda ()
+    (c-set-offset 'case-label' 4)
+    (c-set-offset 'arglist-intro' 4)
+    (c-set-offset 'arglist-cont-nonempty' 4)
+    (c-set-offset 'arglist-close' 0)
+  )
+)
+
 (add-to-list 'auto-mode-alist '("\\.phtml(.*)?$" . html-mode))
 
 ;; YAML
@@ -254,7 +263,7 @@
 
 (add-hook 'java-mode-hook
 	(lambda ()
-;;		(setq indent-tabs-mode nil)
+		(setq indent-tabs-mode nil)
 		(setq c-basic-offset 4)))
 
 ;; move screen lines
