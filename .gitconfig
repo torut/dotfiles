@@ -38,6 +38,7 @@
 	svn-co = svn clone
 	svn-log = svn log
 	gr = grep -H --heading --break --line-number
+	graph = log --graph --oneline --decorate --all
 
 [http]
 	sslVerify = false
