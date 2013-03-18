@@ -15,6 +15,25 @@
 (require 'install-elisp)
 (setq install-elisp-repository-directory "~/.emacs.d/elisp/")
 
+(require 'auto-install)
+(setq auto-install-directory "~/.emacs.d/elisp/")
+;; (auto-install-update-emacswiki-package-name t)
+(auto-install-compatibility-setup)
+
+;; Anything.el
+(require 'anything)
+(require 'anything-config)
+(setq anything-sources
+      '(anything-c-source-buffers+
+        anything-c-source-recentf
+        anything-c-source-emacs-commands
+        anything-c-source-emacs-functions
+        anything-c-source-files-in-current-dir
+        )
+      )
+(define-key global-map "\C-x\C-a" 'anything)
+
+
 ;; setting auto-complete
 (require 'auto-complete)
 (global-auto-complete-mode t)
