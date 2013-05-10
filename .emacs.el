@@ -23,6 +23,7 @@
 ;; Anything.el
 (require 'anything)
 (require 'anything-config)
+(require 'recentf-ext)
 (setq anything-sources
       '(anything-c-source-buffers+
         anything-c-source-recentf
@@ -32,7 +33,9 @@
         )
       )
 (define-key global-map "\C-x\C-a" 'anything)
-
+(eval-after-load "anything"
+  '(define-key anything-map (kbd "C-h") 'delete-backward-char)
+  )
 
 ;; setting auto-complete
 (require 'auto-complete)
