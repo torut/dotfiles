@@ -36,6 +36,8 @@
 (eval-after-load "anything"
   '(define-key anything-map (kbd "C-h") 'delete-backward-char)
   )
+;; recentf の最大数を変更
+(setq recentf-max-saved-items 100)
 
 ;; setting auto-complete
 (require 'auto-complete)
