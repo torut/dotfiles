@@ -9,7 +9,7 @@
 [alias]
 	ad = add
 	add-update = add --update
-	ad-u = !git add-update
+	ad-u = add --update
 	br = branch
 	co = checkout
 	ci = commit
@@ -30,6 +30,7 @@
 	cherry-pick = cherry-pick --no-commit
 	lstat = log --stat
 	develop = checkout develop
+	dev = checkout develop
 	master = checkout master
 	svn-up = svn rebase
 	svn-commit = svn dcommit

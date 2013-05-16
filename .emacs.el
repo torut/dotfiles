@@ -137,7 +137,7 @@
 
 ;; Tabs
 (setq-default tab-width 4)
-(setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode t)
 (setq-default c-basic-offset 4)
 
 ;; diff-mode
@@ -260,7 +260,7 @@
   '(lambda ()
     (setq tab-width 4)
     (setq c-basic-offset 4)
-    (setq indent-tabs-mode nil)
+    (setq indent-tabs-mode t)           ; t => tab, nil => space
   )
 )
 (add-hook 'php-mode-hook
