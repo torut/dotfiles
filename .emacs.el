@@ -271,7 +271,6 @@
     (c-set-offset 'arglist-close' 0)
   )
 )
-
 (add-to-list 'auto-mode-alist '("\\.phtml(.*)?$" . html-mode))
 
 ;; YAML
