@@ -136,7 +136,7 @@ esac
 
 alias la="ls -a"
 alias lf="ls -F"
-alias ll="ls -al"
+alias ll="ls -alh"
 
 alias du="du -h"
 alias df="df -h"

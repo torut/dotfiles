@@ -15,6 +15,30 @@
 (require 'install-elisp)
 (setq install-elisp-repository-directory "~/.emacs.d/elisp/")
 
+(require 'auto-install)
+(setq auto-install-directory "~/.emacs.d/elisp/")
+;; (auto-install-update-emacswiki-package-name t)
+(auto-install-compatibility-setup)
+
+;; Anything.el
+(require 'anything)
+(require 'anything-config)
+(require 'recentf-ext)
+(setq anything-sources
+      '(anything-c-source-buffers+
+        anything-c-source-recentf
+        anything-c-source-emacs-commands
+        anything-c-source-emacs-functions
+        anything-c-source-files-in-current-dir
+        )
+      )
+(define-key global-map "\C-x\C-a" 'anything)
+(eval-after-load "anything"
+  '(define-key anything-map (kbd "C-h") 'delete-backward-char)
+  )
+;; recentf の最大数を変更
+(setq recentf-max-saved-items 100)
+
 ;; setting auto-complete
 (require 'auto-complete)
 (global-auto-complete-mode t)
@@ -113,7 +137,7 @@
 
 ;; Tabs
 (setq-default tab-width 4)
-(setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode t)
 (setq-default c-basic-offset 4)
 
 ;; diff-mode
@@ -127,7 +151,7 @@
 
 (defun magit-setup-diff ()
   ;; 'allではなくtにすると現在選択中のhunkのみ強調表示する
-  (setq magit-diff-refine-hunk 't)
+  (setq magit-diff-refine-hunk t)
   ;; diff用のfaceを設定する
   (diff-mode-setup-faces)
   ;; diffの表示設定が上書きされてしまうのでハイライトを無効にする
@@ -187,8 +211,33 @@
 (add-hook 'ruby-mode-hook
           '(lambda ()
              (inf-ruby-keys)))
-(custom-set-variables
- '(ruby-insert-encoding-magic-comment nil))
+;; (custom-set-variables
+;;  '(ruby-insert-encoding-magic-comment nil))
+(defun ruby-insert-magic-comment-if-needed ()
+  "バッファのcoding-systemをもとにmagic commentをつける。"
+  (when (and (eq major-mode 'ruby-mode)
+             (find-multibyte-characters (point-min) (point-max) 1))
+    (save-excursion
+      (goto-char 1)
+      (when (looking-at "^#!") 
+        (forward-line 1))
+      (if (re-search-forward "^#.+coding" (point-at-eol) t)
+          (delete-region (point-at-bol) (point-at-eol))
+        (open-line 1))
+      (let* ((coding-system (symbol-name buffer-file-coding-system))
+             (encoding (cond ((string-match "japanese-iso-8bit\\|euc-j" coding-system)
+                              "euc-jp")
+                             ((string-match "shift.jis\\|sjis\\|cp932" coding-system)
+                              "shift_jis")
+                             ((string-match "utf-8" coding-system)
+                              "utf-8"))))
+        (insert (format "# -*- coding: %s -*-" encoding))
+        )
+      )
+    )
+  )
+(add-hook 'before-save-hook 'ruby-insert-magic-comment-if-needed)
+
 
 ;; Rails
 ;; (setq load-path (cons "~/.lisp/emacs-rails" load-path))
@@ -211,7 +260,7 @@
   '(lambda ()
     (setq tab-width 4)
     (setq c-basic-offset 4)
-    (setq indent-tabs-mode nil)
+    (setq indent-tabs-mode t)           ; t => tab, nil => space
   )
 )
 (add-hook 'php-mode-hook
@@ -222,7 +271,6 @@
     (c-set-offset 'arglist-close' 0)
   )
 )
-
 (add-to-list 'auto-mode-alist '("\\.phtml(.*)?$" . html-mode))
 
 ;; YAML
