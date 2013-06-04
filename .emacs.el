@@ -1,20 +1,30 @@
 (setq load-path (cons "~/.emacs.d/elisp" load-path))
 
+;; カラーテーマ
 (require 'color-theme)
 (load "./themes/color-theme-library.el")
 (color-theme-charcoal-black)
 (global-font-lock-mode t)
 
-;; no messages for scratch buffer.
+;; 背景色
+(set-background-color "color-233")
+;; (set-background-color "#004c4c")
+
+;; scratch バッファに表示されるメッセージ
 (setq initial-scratch-message "")
 
-;; current line highlight
+;; 現在行をハイライトする
 ;; (require 'highlight-current-line)
 ;; (highlight-current-line-on t)
 
+;; 行の扱いを論理行(改行までを1行)として扱う
+(setq line-move-visual nil)
+
+;; install-elisp の設定
 (require 'install-elisp)
 (setq install-elisp-repository-directory "~/.emacs.d/elisp/")
 
+;; auto-install の設定
 (require 'auto-install)
 (setq auto-install-directory "~/.emacs.d/elisp/")
 ;; (auto-install-update-emacswiki-package-name t)
@@ -39,21 +49,24 @@
 ;; recentf の最大数を変更
 (setq recentf-max-saved-items 100)
 
-;; setting auto-complete
+;; 自動補完の設定
 (require 'auto-complete)
 (global-auto-complete-mode t)
-;; Use C-n/C-p to select candidates
+
+;; C-n/C-p を使って補完リストから選択できるようにする
 (define-key ac-complete-mode-map "\C-n" 'ac-next)
 (define-key ac-complete-mode-map "\C-p" 'ac-previous)
-;; start completion when entered 3 characters
+
+;; 指定した文字数以上入力したら補完をおこなう
 (setq ac-auto-start 5)
-;; Completion by TAB
+
+;; タブキーで補完できるようにする
 (define-key ac-complete-mode-map "\t" 'ac-complete)
 
-;; C-z is undo
+;; C-z キーで Undo できるようにする
 (define-key global-map "\C-z" 'undo)
 
-;; Japanese
+;; 日本語設定
 (set-language-environment "Japanese")
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -61,65 +74,69 @@
 (setq default-buffer-file-coding-system 'utf-8)
 (prefer-coding-system 'utf-8-unix)
 
-;; Anthy
+;; 日本語IME Anthy の設定
 (push "/usr/local/share/emacs/site-lisp/anthy/" load-path)
 (load-library "anthy")
 (setq default-input-method "japanese-anthy")
 
-;; delete-backward-char
+;; C-h でバックスペースキーと同じ動きをするようにする
 (global-set-key "\C-h" 'delete-backward-char)
 
-;; hide menu-bar
+;; メニューバーを隠す
 (menu-bar-mode -1)
 
-;; incremental C-x b
+;; C-x b のバッファリストが表示できるように
 (iswitchb-mode 1)
 
-;; colored region
+;; 選択範囲を色つけする
 (transient-mark-mode t)
 
-;; ignore case
+;; ファイル名の問い合わせで大文字小文字を区別しない
 (setq read-file-name-completion-ignore-case t)
 
-;; better switch to buffer
+;; ファイル名の補完で大文字小文字を区別しない
+(setq completion-ignore-case t)
+
+;; 外部で編集されたら自動再読み込みする
+(global-auto-revert-mode 1)
+
+;; 同名ファイルの場合、識別文字列をディレクトリ名とかにする
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
-;; Set line width to 78 columns...
+;; 1行78文字とする
 (setq fill-column 78)
+;; M-q で78文字で整形できるようにする
 (setq auto-fill-mode t)
 
-;; line number
+;; 行番号を表示する
 (require 'linum)
 (global-linum-mode)
 (line-number-mode t)
 (column-number-mode t)
+
+;; 行番号のフォーマット
 (setq linum-format "%4d ")
 
-;; line, column number on status bar
+;; 行と桁をステータスバーに表示する
 (line-number-mode t)
 (column-number-mode t)
 
-;; emphasis line end white space
+;; 行末の空白をハイライトする
 (setq-default show-trailing-whitespace t)
+;; ハイライトする色
 (set-face-background 'trailing-whitespace "#990000")
 
-;; [yes or no] -> [y or n]
+;; [yes or no] の表示を [y or n] に短縮する
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; dired
-(setq ls-lisp-dirs-first t)
+;; ファイルリストで ls を呼ぶオプションを指定
+(setq dired-listing-switches "-AFl")
+;; ファイルリストでリネームができるようにする
 (require 'wdired)
 (define-key dired-mode-map "r" 'wdired-change-to-wdired-mode)
 
-;; font-lock
-(global-font-lock-mode t)
-
-;; background
-(set-background-color "color-233")
-;; (set-background-color "#004c4c")
-
-;; backup files
+;; 自動バックアップ
 (setq auto-save-default nil)
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name "~/backup/emacs/") t)))
@@ -130,56 +147,36 @@
             backup-directory-alist))
 (setq vc-make-backup-files t)
 
-
-;; do chmod +x automatically if the saved file is executable.
+;; 実行できるスクリプトは保存時に実行権限をつける
 (add-hook 'after-save-hook
         'executable-make-buffer-file-executable-if-script-p)
 
-;; Tabs
-(setq-default tab-width 4)
-(setq-default indent-tabs-mode t)
+;; タブの扱い
+(setq-default tab-width 4)				;; 空白4文字相当
+(setq-default indent-tabs-mode t)		;; タブでのインデント
 (setq-default c-basic-offset 4)
 
-;; diff-mode
+;; diff モードの設定
 (defun diff-mode-setup-faces ()
+  ;; 追加された文字の色、背景色の設定
   (set-face-attribute 'diff-added nil
 					  :foreground "white" :background "dark green")
+  ;; 削除された文字の色、背景色の設定
   (set-face-attribute 'diff-removed nil
 					  :foreground "white" :background "red")
 )
 (add-hook 'diff-mode-hook 'diff-mode-setup-faces)
 
-(defun magit-setup-diff ()
-  ;; 'allではなくtにすると現在選択中のhunkのみ強調表示する
-  (setq magit-diff-refine-hunk t)
-  ;; diff用のfaceを設定する
-  (diff-mode-setup-faces)
-  ;; diffの表示設定が上書きされてしまうのでハイライトを無効にする
-  (set-face-attribute 'magit-item-highlight nil :inherit nil)
-)
-(add-hook 'magit-mode-hook 'magit-setup-diff)
-
-
-;; physical line
-;; (load-library "ce-scroll")
-(require 'physical-line)
-(setq physical-line-slip-backward t)
-(setq-default physical-line-mode t)
-(global-set-key "\C-a" 'physical-line-beginning-of-line)
-(global-set-key "\C-e" 'physical-line-end-of-line)
-
-;; scroll
+;; スクロール量設定
 (setq scroll-conservatively 20
 	  scroll-margin 2
 	  scroll-step 1)
 
-
-;; C
+;; C言語モードの設定
 (setq c-default-style "bsd")
 (setq c-basic-offset 4)
 
-
-;; Perl
+;; Perlモードの設定
 (defalias 'perl-mode 'cperl-mode)
 (setq cperl-indent-level 4)
 (setq cperl-close-paren-offset -4)
@@ -196,11 +193,12 @@
         (copy-face 'font-lock-variable-name-face 'cperl-hash-face)
         (copy-face 'font-lock-function-name-face 'cperl-nonoverridable-face)
         ))
+;; Template-Toolkitモードの設定
 (autoload 'tt-mode "tt-mode")
 (setq auto-mode-alist
       (append '(("\\.tt$" . tt-mode)) auto-mode-alist))
 
-;; Ruby
+;; Rubyモードの設定
 (autoload 'ruby-mode "ruby-mode" "Mode for editing ruby source files" t)
 (setq auto-mode-alist
       (append '(("\\.rb$" . ruby-mode)) auto-mode-alist))
@@ -211,15 +209,15 @@
 (add-hook 'ruby-mode-hook
           '(lambda ()
              (inf-ruby-keys)))
-;; (custom-set-variables
-;;  '(ruby-insert-encoding-magic-comment nil))
+
+;; magic comment を自動挿入するように
 (defun ruby-insert-magic-comment-if-needed ()
   "バッファのcoding-systemをもとにmagic commentをつける。"
   (when (and (eq major-mode 'ruby-mode)
              (find-multibyte-characters (point-min) (point-max) 1))
     (save-excursion
       (goto-char 1)
-      (when (looking-at "^#!") 
+      (when (looking-at "^#!")
         (forward-line 1))
       (if (re-search-forward "^#.+coding" (point-at-eol) t)
           (delete-region (point-at-bol) (point-at-eol))
@@ -238,22 +236,20 @@
   )
 (add-hook 'before-save-hook 'ruby-insert-magic-comment-if-needed)
 
-
-;; Rails
+;; Railsモードの設定
 ;; (setq load-path (cons "~/.lisp/emacs-rails" load-path))
 ;; (require 'rails)
 (setq auto-mode-alist  (cons '("\\.rhtml$" . html-mode) auto-mode-alist))
 (setq auto-mode-alist  (cons '("\\.erb$" . html-mode) auto-mode-alist))
 
-;; CSS
+;; CSSモードの設定
 (autoload 'css-mode "css-mode")
 (setq auto-mode-alist (cons '("\\.css$" . css-mode) auto-mode-alist))
 (setq cssm-indent-level 4)
 (setq cssm-newline-before-closing-bracket t)
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
-;; PHP
-;;(load-library "php-mode")
+;; PHPモードの設定
 (autoload 'php-mode "php-mode" "Major mode for editing php code." t)
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
 (add-hook 'php-mode-user-hook
@@ -273,11 +269,11 @@
 )
 (add-to-list 'auto-mode-alist '("\\.phtml(.*)?$" . html-mode))
 
-;; YAML
+;; YAMLモードの設定
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
-;; Python
+;; Pythonモードの設定
 (autoload 'python-mode "python-mode" "Mode for editing Python source files")
 (add-to-list 'auto-mode-alist '("\\.py" . python-mode))
 
@@ -285,78 +281,48 @@
 (setq auto-coding-functions nil)
 
 ;; svn
-;;(require 'psvn)
 (autoload 'svn-status "dsvn" "Run `svn status'." t)
 (autoload 'svn-update "dsvn" "Run `svn update'." t)
 
-;; git
+;; magit
 (require 'magit)
 
-;; javascript-mode
+;; magit の diff モードの設定
+(defun magit-setup-diff ()
+  ;; 'allではなくtにすると現在選択中のhunkのみ強調表示する
+  (setq magit-diff-refine-hunk t)
+  ;; diff用のfaceを設定する
+  (diff-mode-setup-faces)
+  ;; diffの表示設定が上書きされてしまうのでハイライトを無効にする
+  (set-face-attribute 'magit-item-highlight nil :inherit nil)
+)
+(add-hook 'magit-mode-hook 'magit-setup-diff)
+
+;; javascriptモードの設定
 (autoload 'javascript-mode "javascript" nil t)
 (add-to-list 'auto-mode-alist (cons  "\\.\\(js\\|as\\|json\\|jsn\\)\\'" 'javascript-mode))
 
-;; grep-find
-(setq grep-find-command "find . -type f ! -path '*.svn*' ! -path '*.log*' ! -path '*.git*' -exec grep -nH -e  {} /dev/null \\;")
+;; grep-findのコマンドを設定
+(setq grep-find-command "find . -type f ! -path '*.svn*' ! -path '*.log*' ! -path '*.git*' -exec grep -nHi -e  {} /dev/null \\;")
 
 ;; moccur
 (require 'color-moccur)
 (require 'moccur-edit)
 
+;; startup バッファを表示しない
 (setq inhibit-startup-message t)
+
+;; バッファの最後に空行を入れないようにする
 (setq next-line-add-newlines nil)
 
-;; show pattern mode
+;; 対応する括弧をハイライトする
 (show-paren-mode 1)
 
+;; JAVAモードの設定
 (add-hook 'java-mode-hook
 	(lambda ()
 		(setq indent-tabs-mode nil)
 		(setq c-basic-offset 4)))
-
-;; move screen lines
-(defun screen-column ()
-  "get screen column"
-  (save-excursion
-    (let ((s-column (current-column)))
-        (vertical-motion 0)
-          (- s-column (current-column)))))
-
-(defun move-beginning-of-screen-line ()
-  "move beginning of screen line"
-  (interactive)
-  (vertical-motion 0))
-
-(defun move-end-of-screen-line ()
-  "move end of screen line"
-  (interactive)
-  (vertical-motion 1)
-  (backward-char 1))
-
-(defun next-screen-line ()
-  "next screen line"
-  (interactive)
-  (if truncate-lines
-        (next-line 1)
-    (if (not (eq last-command 'next-screen-line))
-        (setq keep-screen-column (screen-column)))
-    (vertical-motion 1)
-    (move-to-column (+ (current-column) keep-screen-column))))
-
-(defun previous-screen-line ()
-  "previous screen line"
-  (interactive)
-  (if truncate-lines  (previous-line 1)
-    (if (not (eq last-command 'next-screen-line))
-        (setq keep-screen-column (screen-column)))
-    (vertical-motion -1)
-    (move-to-column (+ (current-column) keep-screen-column)))
-  (setq this-command 'next-screen-line))
-
-(global-set-key "\C-a" 'move-beginning-of-screen-line)
-(global-set-key "\C-e" 'move-end-of-screen-line)
-(global-set-key "\C-n" 'next-screen-line)
-(global-set-key "\C-p" 'previous-screen-line)
 
 ;; Shell
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
