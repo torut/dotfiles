@@ -13,7 +13,7 @@
 	br = branch
 	co = checkout
 	ci = commit
-	st = status --short --branch
+	st = status --short
 	di = diff
 	di-cached = diff --cached
 	ps = push
@@ -56,7 +56,7 @@
 	rebase = true
 
 [push]
-	default = simple
+#	default = simple
 
 [merge]
 	ff = false
