@@ -25,7 +25,7 @@ case ${UID} in
   SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
   ;;
 *)
-  PROMPT="%{${fg[magenta]}%}%n %{${reset_color}%}$ "
+  PROMPT="%{${fg[magenta]}%}%n %{${reset_color}%}%{${fg[green]}%}$%{${reset_color}%} "
   PROMPT2="%{${fg[red]}%}%_%%%{${reset_color}%} "
 #  RPROMPT="[%/]"
   RPROMPT="%(5~,%-2~/.../%2~,%~)"
