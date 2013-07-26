@@ -131,7 +131,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; ファイルリストで ls を呼ぶオプションを指定
-(setq dired-listing-switches "-AFl")
+(setq dired-listing-switches "-alh")
 ;; ファイルリストでリネームができるようにする
 (require 'wdired)
 (define-key dired-mode-map "r" 'wdired-change-to-wdired-mode)
