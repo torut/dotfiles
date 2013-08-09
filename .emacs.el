@@ -249,6 +249,11 @@
 (setq cssm-newline-before-closing-bracket t)
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
+;; SCSSモードの設定
+(autoload 'scss-mode "scss-mode")
+(setq scss-compile-at-save nil) ;; 自動コンパイルをオフにする
+(add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
+
 ;; PHPモードの設定
 (autoload 'php-mode "php-mode" "Major mode for editing php code." t)
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
