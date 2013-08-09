@@ -16,6 +16,7 @@
 	st = status --short
 	di = diff
 	di-cached = diff --cached
+	dc = diff --cached
 	ps = push
 	pl = pull
 	s = show
@@ -40,6 +41,7 @@
 	svn-log = svn log
 	gr = grep -H --heading --break --line-number
 	graph = log --graph --oneline --decorate --all
+	nb = checkout -b
 
 [http]
 	sslVerify = false
