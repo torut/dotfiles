@@ -49,6 +49,12 @@
 ;; recentf の最大数を変更
 (setq recentf-max-saved-items 100)
 
+;; popwin.el
+(require 'popwin)
+(setq display-buffer-function 'popwin:display-buffer)
+(setq anything-samewindow nil)
+(push '("*anything*" :height 20) popwin:special-display-config)
+
 ;; 自動補完の設定
 (require 'auto-complete)
 (global-auto-complete-mode t)
@@ -131,7 +137,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; ファイルリストで ls を呼ぶオプションを指定
-(setq dired-listing-switches "-AFl")
+(setq dired-listing-switches "-alh")
 ;; ファイルリストでリネームができるようにする
 (require 'wdired)
 (define-key dired-mode-map "r" 'wdired-change-to-wdired-mode)
@@ -249,6 +255,11 @@
 (setq cssm-newline-before-closing-bracket t)
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
+;; SCSSモードの設定
+(autoload 'scss-mode "scss-mode")
+(setq scss-compile-at-save nil) ;; 自動コンパイルをオフにする
+(add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
+
 ;; PHPモードの設定
 (autoload 'php-mode "php-mode" "Major mode for editing php code." t)
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
@@ -301,6 +312,18 @@
 ;; javascriptモードの設定
 (autoload 'javascript-mode "javascript" nil t)
 (add-to-list 'auto-mode-alist (cons  "\\.\\(js\\|as\\|json\\|jsn\\)\\'" 'javascript-mode))
+
+;; coffeeモードの設定
+(autoload 'coffee-mode "coffee-mode" "Major mode for editing CoffeeScript." t)
+(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
+(add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
+(defun coffee-custom ()
+  "coffee-mode-hook"
+  (and (set (make-local-variable 'tab-width) 2)
+       (set (make-local-variable 'coffee-tab-width) 2))
+)
+(add-hook 'coffee-mode-hook  '(lambda() (coffee-custom)))
+
 
 ;; grep-findのコマンドを設定
 (setq grep-find-command "find . -type f ! -path '*.svn*' ! -path '*.log*' ! -path '*.git*' -exec grep -nHi -e  {} /dev/null \\;")

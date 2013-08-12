@@ -8,4 +8,3 @@ fi
 if [ -f ${HOME}/.zsh.d/git-prompt.zsh ]; then
 	source ${HOME}/.zsh.d/git-prompt.zsh
 fi
-
