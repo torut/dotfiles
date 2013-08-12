@@ -49,6 +49,12 @@
 ;; recentf の最大数を変更
 (setq recentf-max-saved-items 100)
 
+;; popwin.el
+(require 'popwin)
+(setq display-buffer-function 'popwin:display-buffer)
+(setq anything-samewindow nil)
+(push '("*anything*" :height 20) popwin:special-display-config)
+
 ;; 自動補完の設定
 (require 'auto-complete)
 (global-auto-complete-mode t)
