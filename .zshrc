@@ -150,7 +150,7 @@ alias emacs="emacs -nw"
 alias e="emacs -nw"
 alias em="emacs -nw"
 alias l="less"
-
+alias tm="tmux"
 
 ## terminal configuration
 #
@@ -194,23 +194,23 @@ esac
 
 # set terminal title including current directory
 #
-case "${TERM}" in
-xterm|xterm-color|kterm|kterm-color|screen|xterm-256color)
-  precmd() {
-    echo -ne "\ek$(basename $(pwd))\e\\"
-#    echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD}\007"
-  }
-  preexec() {
-    case ${UID} in
-		0)
-			echo -ne "\ek%${1%% *}\e\\"
-			;;
-		*)
-			echo -ne "\ek#${1%% *}\e\\"
-		esac
-  }
-  ;;
-esac
+# case "${TERM}" in
+# xterm|xterm-color|kterm|kterm-color|screen|xterm-256color)
+#   precmd() {
+#     echo -ne "\ek$(basename $(pwd))\e\\"
+# #    echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD}\007"
+#   }
+#   preexec() {
+#     case ${UID} in
+#   		0)
+#   			echo -ne "\ek%${1%% *}\e\\"
+#   			;;
+#   		*)
+#   			echo -ne "\ek#${1%% *}\e\\"
+#   		esac
+#   }
+#   ;;
+# esac
 
 # 256
 if [ "$TERM" != "xterm-color" ]; then
