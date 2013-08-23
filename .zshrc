@@ -150,7 +150,8 @@ alias emacs="emacs -nw"
 alias e="emacs -nw"
 alias em="emacs -nw"
 alias l="less"
-alias tm="tmux"
+alias tma="tmux attach -d"
+alias tmw="tmux new-session \; split-window -h -d"
 
 ## terminal configuration
 #
