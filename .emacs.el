@@ -86,7 +86,9 @@
 (setq default-input-method "japanese-anthy")
 
 ;; C-h でバックスペースキーと同じ動きをするようにする
-(global-set-key "\C-h" 'delete-backward-char)
+;; (global-set-key "\C-h" 'delete-backward-char)
+(keyboard-translate ?\C-h ?\C-?)
+(global-set-key "\C-h" nil)
 
 ;; メニューバーを隠す
 (menu-bar-mode -1)
