@@ -1,4 +1,5 @@
-(setq load-path (cons "~/.emacs.d/elisp" load-path))
+(add-to-list 'load-path "~/.emacs.d/elisp")
+;; (setq load-path (cons "~/.emacs.d/elisp" load-path))
 
 ;; カラーテーマ
 (require 'color-theme)
@@ -210,13 +211,30 @@
 (autoload 'ruby-mode "ruby-mode" "Mode for editing ruby source files" t)
 (setq auto-mode-alist
       (append '(("\\.rb$" . ruby-mode)) auto-mode-alist))
+(setq auto-mode-alist
+      (append '(("Gemfile$" . ruby-mode)) auto-mode-alist))
 (setq interpreter-mode-alist (append '(("ruby" . ruby-mode))
                                      interpreter-mode-alist))
-(autoload 'run-ruby "inf-ruby" "Run an inferior Ruby process")
-(autoload 'inf-ruby-keys "inf-ruby" "Set local key defs for inf-ruby in ruby-mode")
-(add-hook 'ruby-mode-hook
-          '(lambda ()
-             (inf-ruby-keys)))
+(autoload 'run-ruby "inf-ruby"
+  "Run an inferior Ruby process")
+(autoload 'inf-ruby-keys "inf-ruby"
+  "Set local key defs for inf-ruby in ruby-mode")
+(add-hook 'ruby-mode-hook '(lambda () (inf-ruby-keys)))
+
+;; Ruby-electric
+(defun ruby-insert-end ()
+  (interactive)
+  (insert "end")
+  (ruby-indent-line t)
+  (end-of-line))
+
+(require 'ruby-electric)
+(add-hook 'ruby-mode-hook '(lambda () (ruby-electric-mode t)))
+
+;; ruby-block
+(require 'ruby-block)
+(ruby-block-mode t)
+(setq ruby-block-highlight-toggle t)
 
 ;; magic comment を自動挿入するように
 (defun ruby-insert-magic-comment-if-needed ()
@@ -245,14 +263,12 @@
 (add-hook 'before-save-hook 'ruby-insert-magic-comment-if-needed)
 
 ;; Railsモードの設定
-;; (setq load-path (cons "~/.lisp/emacs-rails" load-path))
-;; (require 'rails)
-(setq auto-mode-alist  (cons '("\\.rhtml$" . html-mode) auto-mode-alist))
-(setq auto-mode-alist  (cons '("\\.erb$" . html-mode) auto-mode-alist))
+;; (add-to-list 'auto-mode-alist '("\\.rhtml$" . html-mode))
+;; (add-to-list 'auto-mode-alist  '("\\.erb$" . html-mode))
 
 ;; CSSモードの設定
 (autoload 'css-mode "css-mode")
-(setq auto-mode-alist (cons '("\\.css$" . css-mode) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
 (setq cssm-indent-level 4)
 (setq cssm-newline-before-closing-bracket t)
 (setq cssm-indent-function #'cssm-c-style-indenter)
