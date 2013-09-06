@@ -266,6 +266,10 @@
 ;; (add-to-list 'auto-mode-alist '("\\.rhtml$" . html-mode))
 ;; (add-to-list 'auto-mode-alist  '("\\.erb$" . html-mode))
 
+;; hamlモードの設定
+(require 'haml-mode)
+(add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
+
 ;; CSSモードの設定
 (autoload 'css-mode "css-mode")
 (add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
@@ -277,6 +281,12 @@
 (autoload 'scss-mode "scss-mode")
 (setq scss-compile-at-save nil) ;; 自動コンパイルをオフにする
 (add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
+
+;; LESSモードの設定
+(require 'less-css-mode)
+;; (autoload 'less-mode "less-css-mode")
+(setq less-compile-at-save nil) ;; 自動コンパイルをオフにする
+(add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode))
 
 ;; PHPモードの設定
 (autoload 'php-mode "php-mode" "Major mode for editing php code." t)
