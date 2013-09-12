@@ -42,6 +42,7 @@
 	gr = grep -H --heading --break --line-number
 	graph = log --graph --oneline --decorate --all
 	nb = checkout -b
+	noffmerge = merge --no-ff
 
 [http]
 	sslVerify = false
@@ -61,4 +62,4 @@
 #	default = simple
 
 [merge]
-	ff = false
+	ff = false					# later of 1.7.6
