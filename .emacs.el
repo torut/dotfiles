@@ -181,6 +181,14 @@
 	  scroll-margin 2
 	  scroll-step 1)
 
+;; htmlモードの設定
+(add-hook 'html-mode-hook
+          (lambda()
+            (setq sgml-basic-offset 2)  ;; 空白2文字
+            (setq indent-tabs-mode nil) ;; インデントにタブを使わない
+            )
+          )
+
 ;; C言語モードの設定
 (setq c-default-style "bsd")
 (setq c-basic-offset 4)
