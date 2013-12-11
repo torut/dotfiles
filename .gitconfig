@@ -1,6 +1,7 @@
 [core]
 	editor = emacs
 	page = "lv -c"
+	excludesfile = ~/.gitignore
 
 [user]
 	name = Toru Tamura
