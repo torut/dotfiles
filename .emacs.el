@@ -1,4 +1,5 @@
-(setq load-path (cons "~/.emacs.d/elisp" load-path))
+(add-to-list 'load-path "~/.emacs.d/elisp")
+;; (setq load-path (cons "~/.emacs.d/elisp" load-path))
 
 ;; カラーテーマ
 (require 'color-theme)
@@ -86,7 +87,9 @@
 (setq default-input-method "japanese-anthy")
 
 ;; C-h でバックスペースキーと同じ動きをするようにする
-(global-set-key "\C-h" 'delete-backward-char)
+;; (global-set-key "\C-h" 'delete-backward-char)
+(keyboard-translate ?\C-h ?\C-?)
+(global-set-key "\C-h" nil)
 
 ;; メニューバーを隠す
 (menu-bar-mode -1)
@@ -178,6 +181,14 @@
 	  scroll-margin 2
 	  scroll-step 1)
 
+;; htmlモードの設定
+(add-hook 'html-mode-hook
+          (lambda()
+            (setq sgml-basic-offset 2)  ;; 空白2文字
+            (setq indent-tabs-mode nil) ;; インデントにタブを使わない
+            )
+          )
+
 ;; C言語モードの設定
 (setq c-default-style "bsd")
 (setq c-basic-offset 4)
@@ -208,13 +219,30 @@
 (autoload 'ruby-mode "ruby-mode" "Mode for editing ruby source files" t)
 (setq auto-mode-alist
       (append '(("\\.rb$" . ruby-mode)) auto-mode-alist))
+(setq auto-mode-alist
+      (append '(("Gemfile$" . ruby-mode)) auto-mode-alist))
 (setq interpreter-mode-alist (append '(("ruby" . ruby-mode))
                                      interpreter-mode-alist))
-(autoload 'run-ruby "inf-ruby" "Run an inferior Ruby process")
-(autoload 'inf-ruby-keys "inf-ruby" "Set local key defs for inf-ruby in ruby-mode")
-(add-hook 'ruby-mode-hook
-          '(lambda ()
-             (inf-ruby-keys)))
+(autoload 'run-ruby "inf-ruby"
+  "Run an inferior Ruby process")
+(autoload 'inf-ruby-keys "inf-ruby"
+  "Set local key defs for inf-ruby in ruby-mode")
+(add-hook 'ruby-mode-hook '(lambda () (inf-ruby-keys)))
+
+;; Ruby-electric
+(defun ruby-insert-end ()
+  (interactive)
+  (insert "end")
+  (ruby-indent-line t)
+  (end-of-line))
+
+(require 'ruby-electric)
+(add-hook 'ruby-mode-hook '(lambda () (ruby-electric-mode t)))
+
+;; ruby-block
+(require 'ruby-block)
+(ruby-block-mode t)
+(setq ruby-block-highlight-toggle t)
 
 ;; magic comment を自動挿入するように
 (defun ruby-insert-magic-comment-if-needed ()
@@ -243,14 +271,16 @@
 (add-hook 'before-save-hook 'ruby-insert-magic-comment-if-needed)
 
 ;; Railsモードの設定
-;; (setq load-path (cons "~/.lisp/emacs-rails" load-path))
-;; (require 'rails)
-(setq auto-mode-alist  (cons '("\\.rhtml$" . html-mode) auto-mode-alist))
-(setq auto-mode-alist  (cons '("\\.erb$" . html-mode) auto-mode-alist))
+;; (add-to-list 'auto-mode-alist '("\\.rhtml$" . html-mode))
+;; (add-to-list 'auto-mode-alist  '("\\.erb$" . html-mode))
+
+;; hamlモードの設定
+(require 'haml-mode)
+(add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
 
 ;; CSSモードの設定
 (autoload 'css-mode "css-mode")
-(setq auto-mode-alist (cons '("\\.css$" . css-mode) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
 (setq cssm-indent-level 4)
 (setq cssm-newline-before-closing-bracket t)
 (setq cssm-indent-function #'cssm-c-style-indenter)
@@ -259,6 +289,12 @@
 (autoload 'scss-mode "scss-mode")
 (setq scss-compile-at-save nil) ;; 自動コンパイルをオフにする
 (add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
+
+;; LESSモードの設定
+(require 'less-css-mode)
+;; (autoload 'less-mode "less-css-mode")
+(setq less-compile-at-save nil) ;; 自動コンパイルをオフにする
+(add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode))
 
 ;; PHPモードの設定
 (autoload 'php-mode "php-mode" "Major mode for editing php code." t)
