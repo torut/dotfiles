@@ -9,19 +9,15 @@
 
 [alias]
 	ad = add
-	add-update = add --update
-	ad-u = add --update
 	br = branch
 	co = checkout
 	ci = commit
 	st = status --short
 	di = diff
-	di-cached = diff --cached
 	dc = diff --cached
 	ps = push
 	pl = pull
 	s = show
-	up = pull --rebase
 	l = log --date=iso --format=medium
 	ls = log --name-status
 	history = log --graph --date=short --pretty=format:'%C(green)%h%C(reset) %C(cyan)%cd%C(reset) %cn %C(red)%d%C(reset) %C(white bold)%s%C(reset)'
@@ -37,9 +33,6 @@
 	svn-up = svn rebase
 	svn-commit = svn dcommit
 	svn-ci = !git svn-commit
-	svn-info = svn info
-	svn-co = svn clone
-	svn-log = svn log
 	gr = grep -H --heading --break --line-number
 	graph = log --graph --oneline --decorate --all
 	nb = checkout -b
