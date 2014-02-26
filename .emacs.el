@@ -346,8 +346,10 @@
 (add-hook 'magit-mode-hook 'magit-setup-diff)
 
 ;; javascriptモードの設定
-(autoload 'javascript-mode "javascript" nil t)
-(add-to-list 'auto-mode-alist (cons  "\\.\\(js\\|as\\|json\\|jsn\\)\\'" 'javascript-mode))
+;; (autoload 'javascript-mode "javascript" nil t)
+;; (add-to-list 'auto-mode-alist (cons  "\\.\\(js\\|as\\|json\\|jsn\\)\\'" 'javascript-mode))
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist (cons  "\\.\\(js\\|as\\|json\\|jsn\\)\\'" 'js2-mode))
 
 ;; coffeeモードの設定
 (autoload 'coffee-mode "coffee-mode" "Major mode for editing CoffeeScript." t)
