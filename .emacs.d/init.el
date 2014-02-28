@@ -12,7 +12,10 @@
 
 ;; init-loader
 (require 'init-loader)
+
+;; ログファイルを表示(nil にすると非表示)
+(custom-set-variables
+ '(init-loader-show-log-after-init nil))
+
 ;; 設定ディレクトリ
 (init-loader-load "~/.emacs.d/inits")
-;; ログファイルを表示
-(setq init-loader-show-log-after-init t)
