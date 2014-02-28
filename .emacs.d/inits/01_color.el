@@ -14,4 +14,3 @@
 ;; 行末の空白をハイライトする
 (setq-default show-trailing-whitespace t)
 (set-face-background 'trailing-whitespace "#990000") ;; ハイライトする色
-
