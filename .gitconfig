@@ -53,7 +53,7 @@
 	rebase = true
 
 [push]
-#	default = simple
+	default = simple
 
 [merge]
 	ff = false					# later of 1.7.6
