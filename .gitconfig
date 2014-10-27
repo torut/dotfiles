@@ -25,7 +25,7 @@
 	history-stat = log --graph --pretty=format:'%C(cyan)%ad%C(reset) %C(magenta)%cn%C(reset) %C(green)%h%C(reset)%n%C(red)%d%C(reset)%n%C(white bold)%s%C(reset)%n' --stat
 	h  = !git history
 	hs = !git history-stat
-	export = archive --format=tar HEAD
+	export = archive --format=tar HEAD^{tree}
 	cherry-pick = cherry-pick --no-commit
 	lstat = log --stat
 	develop = checkout develop
