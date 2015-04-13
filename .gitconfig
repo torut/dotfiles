@@ -1,6 +1,6 @@
 [core]
 	editor = emacs
-	page = "lv -c"
+	page = "less -r"
 	excludesfile = ~/.gitignore
 
 [user]
@@ -8,6 +8,7 @@
 	email = torut@ttsoft.jp
 
 [alias]
+	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
 	ad = add
 	br = branch
 	co = checkout
@@ -50,14 +51,19 @@
 	interactive = auto
 	grep = auto
 
+
+[branch]
+	autosetuprebase = always
+
 [pull]
 	rebase = true
 
 [push]
-	default = simple
+	default = current
 
 [merge]
 	ff = false					# later of 1.7.6
+
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
