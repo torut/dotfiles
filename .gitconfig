@@ -36,7 +36,7 @@
 	svn-commit = svn dcommit
 	svn-ci = !git svn-commit
 	gr = grep -H --heading --break --line-number
-	graph = log --graph --oneline --decorate --all
+	graph = log --graph --all --pretty=format:'%C(yellow)%h%C(reset) -%C(green)%d%C(reset) %s %C(red)(%cd) %C(cyan)<%an>%Creset' --abbrev-commit --date=local
 	nb = checkout -b
 	noffmerge = merge --no-ff
 
