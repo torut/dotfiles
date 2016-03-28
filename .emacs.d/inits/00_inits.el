@@ -78,7 +78,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; ファイルリストで ls を呼ぶオプションを指定
-(setq dired-listing-switches "-alh")
+(setq dired-listing-switches "-alh --time-style=long-iso")
 ;; diredを2つのウィンドウで開いている時に、デフォルトの移動orコピー先をもう一方のdiredで開いているディレクトリにする
 (setq dired-dwim-target t)
 ;; ディレクトリを再帰的にコピーする
@@ -113,6 +113,9 @@
 ;; grep-findのコマンドを設定
 (setq grep-find-command "find . -type f ! -path '*.svn*' ! -path '*.log*' ! -path '*.git*' -exec grep -nHi -e  {} /dev/null \\;")
 
+;; find-dired の ls コマンドの変更
+(setq find-ls-option '("-exec ls -ld --time-style=long-iso {} \\;" . "-ld"))
+
 ;; startup バッファを表示しない
 (setq inhibit-startup-message t)
 
@@ -132,3 +135,5 @@
 	  scroll-margin 2
 	  scroll-step 1)
 
+;; 終了確認
+(setq confirm-kill-emacs 'y-or-n-p)
