@@ -14,7 +14,6 @@
 	co = checkout
 	ci = commit
 	st = status --short
-	d = diff
 	di = diff
 	dc = diff --cached
 	ps = push
@@ -28,17 +27,28 @@
 	hs = !git history-stat
 	export = archive --format=tar HEAD^{tree}
 	cherry-pick = cherry-pick --no-commit
-	lstat = log --stat
+	graph = log --graph --oneline --decorate --all
+	newbranch = checkout -b
+	nb = checkout -b
+
 	develop = checkout develop
-	dev = checkout develop
 	master = checkout master
 	svn-up = svn rebase
 	svn-commit = svn dcommit
 	svn-ci = !git svn-commit
-	gr = grep -H --heading --break --line-number
-	graph = log --graph --all --pretty=format:'%C(yellow)%h%C(reset) -%C(green)%d%C(reset) %s %C(red)(%cd) %C(cyan)<%an>%Creset' --abbrev-commit --date=local
-	nb = checkout -b
-	noffmerge = merge --no-ff
+
+	branches = branch -a
+	tags = tag
+	stashes = stash list
+	remotes = remote -v
+
+	unstage = reset -q HEAD --
+	discard = checkout --
+	uncommit = reset --mixed HEAD~
+	amend = commit --amend
+
+	prestage = diff -w --word-diff=color
+	precommit = diff --cached -w --word-diff=color --word-diff-regex='[^[:space:]<>]+'
 
 [http]
 	sslVerify = false
@@ -50,7 +60,6 @@
 	branch = auto
 	interactive = auto
 	grep = auto
-
 
 [branch]
 	autosetuprebase = always
