@@ -2,9 +2,10 @@
 	editor = emacs
 	page = "less -r"
 	excludesfile = ~/.gitignore
+	autocrlf = false
 
 [user]
-	name = Toru Tamura
+	name = Toru TAMURA
 	email = torut@ttsoft.jp
 
 [alias]
