@@ -127,7 +127,12 @@ alias j="jobs -l"
 
 case "${OSTYPE}" in
 freebsd*|darwin*)
-  alias ls="ls -G -w"
+  if [ -e "/usr/local/opt/coreutils/libexec/gnubin/ls" ]; then
+	# if installed coreutils
+    alias ls="ls --color"
+  else
+    alias ls="ls -G -w"
+  fi
   ;;
 linux*)
   alias ls="ls --color"
