@@ -181,6 +181,14 @@
 	  scroll-margin 2
 	  scroll-step 1)
 
+;; webモード
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(setq web-mode-markup-indent-offset   2)
+
 ;; htmlモードの設定
 (add-hook 'html-mode-hook
           (lambda()
@@ -332,7 +340,7 @@
 (autoload 'svn-update "dsvn" "Run `svn update'." t)
 
 ;; magit
-;; (require 'magit)
+(require 'magit)
 
 ;; magit の diff モードの設定
 (defun magit-setup-diff ()
