@@ -77,14 +77,24 @@
 ;; [yes or no] の表示を [y or n] に短縮する
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; OSXでのlisting directory failed but access-file' worked 回避
+(when (eq system-type 'darwin)
+  (require 'ls-lisp)
+  (setq ls-lisp-use-insert-directory-program nil))
+
 ;; ファイルリストで ls を呼ぶオプションを指定
-(setq dired-listing-switches "-alh --time-style=long-iso")
+(unless (eq system-type 'darwin)
+  (setq dired-listing-switches "-alh --time-style=long-iso"))
+
 ;; diredを2つのウィンドウで開いている時に、デフォルトの移動orコピー先をもう一方のdiredで開いているディレクトリにする
 (setq dired-dwim-target t)
 ;; ディレクトリを再帰的にコピーする
 (setq dired-recursive-copies 'always)
 ;; diredバッファでC-sした時にファイル名だけにマッチするように
 (setq dired-isearch-filenames t)
+;; find-dired の ls コマンドの変更
+(setq find-ls-option '("-exec ls -ld --time-style=long-iso {} \\;" . "-ld"))
+
 
 
 ;; ファイルリストでリネームができるようにする
@@ -112,9 +122,6 @@
 
 ;; grep-findのコマンドを設定
 (setq grep-find-command "find . -type f ! -path '*.svn*' ! -path '*.log*' ! -path '*.git*' -exec grep -nHi -e  {} /dev/null \\;")
-
-;; find-dired の ls コマンドの変更
-(setq find-ls-option '("-exec ls -ld --time-style=long-iso {} \\;" . "-ld"))
 
 ;; startup バッファを表示しない
 (setq inhibit-startup-message t)
