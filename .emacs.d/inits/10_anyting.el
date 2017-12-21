@@ -17,6 +17,12 @@
 ;; recentf の最大数を変更
 (setq recentf-max-saved-items 500)
 
+;; recentf の保存内容のクリーンアップをしない
+(setq recentf-auto-cleanup 'never)
+
+;; 30秒に一度自動保存
+(setq recentf-auto-save-timer (run-with-idle-timer 30 t 'recentf-save-list))
+
 ;; popwin.el
 (require 'popwin)
 (setq display-buffer-function 'popwin:display-buffer)
