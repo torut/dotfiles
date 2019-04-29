@@ -3,7 +3,7 @@
 
 ;; 表示位置の設定
 (setq initial-frame-alist
-      '((top . 1) (left . 1) (width . 160) (height . 60)))
+      '((top . 1) (left . 1) (width . 160) (height . 52)))
 (tool-bar-mode -1)
 
 ;; 行の扱いを論理行(改行までを1行)として扱う
