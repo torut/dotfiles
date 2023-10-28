@@ -68,7 +68,7 @@
 (column-number-mode t)
 
 ;; 行番号のフォーマット
-(setq linum-format "%4d ")
+(setq linum-format "%4d|")
 
 ;; 行と桁をステータスバーに表示する
 (line-number-mode t)
