@@ -22,7 +22,7 @@
 	s = show
 	l = log --date=iso --format=medium
 	ls = log --name-status
-	history = log --graph --date=short --pretty=format:'%C(green)%h%C(reset) %C(cyan)%cd%C(reset) %cn %C(red)%d%C(reset) %C(white bold)%s%C(reset)'
+	history = log --graph --date=iso --pretty=format:'%C(green)%h%C(reset) %C(cyan)%cd%C(reset) %cn %C(red)%d%C(reset) %C(white bold)%s%C(reset)'
 	history-stat = log --graph --pretty=format:'%C(cyan)%ad%C(reset) %C(magenta)%cn%C(reset) %C(green)%h%C(reset)%n%C(red)%d%C(reset)%n%C(white bold)%s%C(reset)%n' --stat
 	h  = !git history
 	hs = !git history-stat

@@ -7,3 +7,6 @@
 auto-save-list
 tramp
 .\#*
+
+!/.emacs.d/elisp/magit/*.elc
+.emacs.d/auto-save-list

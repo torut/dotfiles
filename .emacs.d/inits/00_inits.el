@@ -17,6 +17,9 @@
 (setq default-buffer-file-coding-system 'utf-8)
 (prefer-coding-system 'utf-8-unix)
 
+;; font
+(set-face-attribute 'default nil :family nil :height 180)
+
 ;; 自動補完の設定
 (require 'auto-complete)
 (global-auto-complete-mode t)
@@ -73,6 +76,21 @@
 ;; 行と桁をステータスバーに表示する
 (line-number-mode t)
 (column-number-mode t)
+
+;; ステータスバーに時刻表示
+(setq display-time-interval 60)
+(setq display-time-string-forms
+	  '((format "%d-%02d-%02d %02d:%02d"
+				(string-to-number year) (string-to-number month) (string-to-number day)
+				(string-to-number 24-hours) (string-to-number minutes) (string-to-number seconds)
+				)))
+(setq display-time-day-and-date t)
+;; 時刻表示の左隣に日付を追加。
+(setq display-time-kawakami-form t)
+;; 24時間制
+(setq display-time-24hr-format t)
+(display-time-mode t)
+
 
 ;; [yes or no] の表示を [y or n] に短縮する
 (fset 'yes-or-no-p 'y-or-n-p)
