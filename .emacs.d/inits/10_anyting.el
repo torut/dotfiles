@@ -10,10 +10,12 @@
         anything-c-source-files-in-current-dir
         )
       )
+;; anythingの呼び出しキー
 (define-key global-map "\C-x\C-a" 'anything)
 (eval-after-load "anything"
   '(define-key anything-map (kbd "C-h") 'delete-backward-char)
   )
+
 ;; recentf の最大数を変更
 (setq recentf-max-saved-items 500)
 

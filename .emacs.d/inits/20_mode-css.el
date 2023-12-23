@@ -7,11 +7,13 @@
 
 ;; SCSSモードの設定
 (autoload 'scss-mode "scss-mode")
-(setq scss-compile-at-save nil) ;; 自動コンパイルをオフにする
+;; 自動コンパイルをオフにする
+(setq scss-compile-at-save nil)
 (add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
 
 ;; LESSモードの設定
 (require 'less-css-mode)
-(setq less-compile-at-save nil) ;; 自動コンパイルをオフにする
+;; 自動コンパイルをオフにする
+(setq less-compile-at-save nil)
 (add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode))
 

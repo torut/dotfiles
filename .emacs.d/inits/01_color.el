@@ -13,4 +13,9 @@
 
 ;; 行末の空白をハイライトする
 (setq-default show-trailing-whitespace t)
-(set-face-background 'trailing-whitespace "#990000") ;; ハイライトする色
+;; ハイライトする色
+(set-face-background 'trailing-whitespace "#990000")
+
+;; 選択範囲を色つけする
+(transient-mark-mode t)
+

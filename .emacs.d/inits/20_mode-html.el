@@ -1,7 +1,11 @@
 ;; htmlモードの設定
-(add-hook 'html-mode-hook
-          (lambda()
-            (setq sgml-basic-offset 2) ;; 空白2文字
-            (setq indent-tabs-mode nil) ;; インデントにタブを使わない
-            )
-          )
+(defun html-mode-setup ()
+  ;; 空白2文字
+  (setq sgml-basic-offset 2)
+  ;; インデントにタブを使わない
+  (setq indent-tabs-mode nil)
+)
+
+(add-hook 'html-mode-hook 'html-mode-setup)
+(add-to-list 'auto-mode-alist '("\\.phtml(.*)?$" . html-mode))
+

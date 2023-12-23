@@ -8,13 +8,14 @@
 (setq cperl-label-offset -4)
 (setq cperl-invalid-face nil)
 (setq cperl-highlight-variables-indiscriminately t)
-(add-hook 'cperl-mode-hook
-		  (lambda ()
-			(setq tab-width 4)
-			(copy-face 'font-lock-variable-name-face 'cperl-array-face)
-			(copy-face 'font-lock-variable-name-face 'cperl-hash-face)
-			(copy-face 'font-lock-function-name-face 'cperl-nonoverridable-face)
-			))
+
+(defun cperl-mode-setup ()
+  (setq tab-width 4)
+  (copy-face 'font-lock-variable-name-face 'cperl-array-face)
+  (copy-face 'font-lock-variable-name-face 'cperl-hash-face)
+  (copy-face 'font-lock-function-name-face 'cperl-nonoverridable-face)
+)
+(add-hook 'cperl-mode-hook 'cperl-mode-setup)
 
 ;; Template-Toolkitモードの設定
 (autoload 'tt-mode "tt-mode")
