@@ -485,12 +485,12 @@ In that case set to `NIL'."
     map)
   "Keymap for `php-mode'.")
 
-(c-lang-defconst c-mode-menu
-  php (append '(["Complete function name" php-complete-function t]
-                ["Browse manual" php-browse-manual t]
-                ["Search documentation" php-search-documentation t]
-                ["----" t])
-              (c-lang-const c-mode-menu)))
+;; (c-lang-defconst c-mode-menu
+;;   php (append '(["Complete function name" php-complete-function t]
+;;                 ["Browse manual" php-browse-manual t]
+;;                 ["Search documentation" php-search-documentation t]
+;;                 ["----" t])
+;;               (c-lang-const c-mode-menu)))
 
 (c-lang-defconst c-at-vsemi-p-fn
   php 'php-c-at-vsemi-p)
