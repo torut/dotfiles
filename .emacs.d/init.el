@@ -10,12 +10,3 @@
 ;; 引数のディレクトリとそのサブディレクトリをload-pathに追加
 (add-to-load-path "elisp" "inits")
 
-;; init-loader
-(require 'init-loader)
-
-;; ログファイルを表示(nil にすると非表示)
-(custom-set-variables
- '(init-loader-show-log-after-init nil))
-
-;; 設定ディレクトリ
-(init-loader-load "~/.emacs.d/inits")

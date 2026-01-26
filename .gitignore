@@ -10,3 +10,4 @@ tramp
 
 !/.emacs.d/elisp/magit/*.elc
 .emacs.d/auto-save-list
+.emacs.d/eln-cache
