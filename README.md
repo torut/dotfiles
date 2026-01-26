@@ -4,13 +4,9 @@
 
 ## Emacs
 
-php-modeはEmacsのバージョン24以上で想定.
-24未満の場合は `php-mode.el.under24` をリネームして使う.
+バージョン29以降用.
+それ以前は master ブランチを参照.
 
-```
-$ mv php-mode.el php-mode.el.upper23
-$ mb php-mode.el.under24 php-mode.el
-```
 
 ## Git
 
