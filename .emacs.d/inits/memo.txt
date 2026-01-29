@@ -1,0 +1,7 @@
+# 00_inits.
+- iswitchb-modeのかわりにVertico + Consult
+- auto-completeのかわりにcorfu への移行を検討
+
+インデントがタブになる.
+jsとかインデント幅は2だけど、2つ重なるとタブになる.
+
