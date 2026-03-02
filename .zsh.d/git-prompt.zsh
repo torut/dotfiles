@@ -28,23 +28,7 @@ function rprompt-git-current-branch {
 		action="|$action";
 	fi
 
-	# ステータスの状況によって色を変えたい場合は次の2行をコメントアウト
 	PROMPT="[$name$action]%E
-$defaultPrompt"
-	return
-
-    st=`git status 2> /dev/null`
-	if [[ "$st" =~ "(?m)^nothing to" ]]; then
-        color=%F{green}
-	elif [[ "$st" =~ "(?m)^nothing added" ]]; then
-        color=%F{yellow}
-	elif [[ "$st" =~ "(?m)^# Untracked" ]]; then
-        color=%B%F{red}
-    else
-        color=%F{red}
-    fi
-    
-	PROMPT="[$color$name$action%f%b]
 $defaultPrompt"
 }
 
