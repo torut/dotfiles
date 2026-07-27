@@ -1,8 +1,21 @@
 [core]
 	editor = emacs
 	page = "less -r"
+	pager = delta
 	excludesfile = ~/.gitignore
 	autocrlf = false
+
+[delta]
+  true-color = always
+  syntax-theme = Dracula
+  line-numbers = true
+  wrap = true
+  # 以下はダークモード
+  dark = true
+  light = false
+  # 以下はライトモード
+  # dark = false
+  # light = true
 
 [user]
 	name = Toru TAMURA
