@@ -119,7 +119,7 @@
 (use-package grep
   :ensure nil
   :config
-  (setq grep-find-command "find . -type f ! -path '*.svn*' ! -path '*.log*' ! -path '*.git*' -exec grep -nHi -e  {} /dev/null \;"))
+  (setq grep-find-command "find . -type f ! -path '*.svn*' ! -path '*.log*' ! -path '*.git*' -exec grep -nHi -e  {} /dev/null \\;"))
 
 ;; シェルモードでANSIカラーを有効化
 (use-package ansi-color
