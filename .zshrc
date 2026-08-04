@@ -225,8 +225,8 @@ fi
 
 # set default editor and more.
 export PATH=$PATH:$HOME/bin
-export SVN_EDITOR=emacs
-export EDITOR=emacs
+export SVN_EDITOR="emacs -nw"
+export EDITOR="emacs -nw"
 export PAGER=less
 export LESSCHARSET=utf-8
 
