@@ -12,6 +12,10 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; GNU ELPAの署名鍵ローテーションにローカルのgnupgキーリングが追従できていない環境では
+;; archive-contents/パッケージ本体の署名検証が失敗しインストールできなくなるため無効化する。
+;; (MELPA由来のパッケージはそもそも署名なしで配布されている)
+(setq package-check-signature nil)
 (package-initialize)
 
 ;; vertico/consult/marginalia/orderless は Emacs 27.1 以降が必須のため、
