@@ -65,9 +65,6 @@
 	prestage = diff -w --word-diff=color
 	precommit = diff --cached -w --word-diff=color --word-diff-regex='[^[:space:]<>]+'
 
-[http]
-	sslVerify = false
-
 [color]
 	ui = auto
 	status = auto
