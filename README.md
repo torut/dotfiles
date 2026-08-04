@@ -33,13 +33,12 @@ $ ln -s dotfiles/gitignore ~/.gitignore
 - tmux 2.9未満: `.tmux.conf.d/pre-2.9.conf` (`-fg`/`-bg`/`-attr`系オプション)
 
 tmux 2.9で`-fg`/`-bg`/`-attr`系オプションが削除され`-style`に統合されたための分岐. バージョン判定は
-`bin/tmux-is-2.9-or-later.sh`で行う(`if-shell`の`-F`フラグは古いtmux(1.8など)には無いため).
-`.tmux.conf`・`.tmux.conf.d/`・`bin/`をあわせてシンボリックリンクする.
+`.tmux.conf.d/tmux-is-2.9-or-later.sh`で行う(`if-shell`の`-F`フラグは古いtmux(1.8など)には無いため).
+`.tmux.conf`と`.tmux.conf.d/`をあわせてシンボリックリンクする.
 
 ```
 $ ln -s dotfiles/.tmux.conf ~/.tmux.conf
 $ ln -s dotfiles/.tmux.conf.d ~/.tmux.conf.d
-$ ln -s dotfiles/bin ~/bin
 ```
 
 ## ZShell
