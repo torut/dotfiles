@@ -1,4 +1,4 @@
-;; ロードパスを追加する関数を定義 (Emacs 24-26 系の init-loader が使用)
+;; ロードパスを追加する関数を定義 (Emacs 24-28 系の init-loader が使用)
 (defun add-to-load-path (&rest paths)
   (let (path)
     (dolist (path paths paths)
@@ -18,10 +18,13 @@
 (setq package-check-signature nil)
 (package-initialize)
 
-;; vertico/consult/marginalia/orderless は Emacs 27.1 以降が必須のため、
-;; Emacs のバージョンで設定ファイル一式を丸ごと出し分ける。
-(if (version< emacs-version "27.1")
-    ;; Emacs 24-26: 旧来の anything + init-loader 構成
+;; MELPAで現在配布されているvertico/consult/marginaliaはEmacs 29.1以降を、
+;; modus-themes/magit/markdown-modeはEmacs 28.1以降を要求する
+;; (package.elは過去バージョンへのフォールバックができないため、
+;;  古いEmacsでは配布中のバージョンをそもそもインストールできない)。
+;; そのため一番厳しい要求に合わせ29.1をしきい値に設定ファイル一式を丸ごと出し分ける。
+(if (version< emacs-version "29.1")
+    ;; Emacs 24-28: 旧来の anything + init-loader 構成
     (progn
       (add-to-load-path "elisp" "inits-legacy")
       (require 'init-loader)
@@ -29,13 +32,8 @@
        '(init-loader-show-log-after-init nil))
       (init-loader-load "~/.emacs.d/inits-legacy"))
 
-  ;; Emacs 27.1 以降: use-package + vertico 構成
+  ;; Emacs 29.1 以降: use-package + vertico 構成 (use-packageは本体組み込み)
   (progn
-    ;; use-package は Emacs 29 以降のみ本体組み込み。
-    ;; 27.1/28系では未インストールの場合に package.el 経由で導入する。
-    (unless (package-installed-p 'use-package)
-      (package-refresh-contents)
-      (package-install 'use-package))
     (require 'use-package)
     (setq use-package-always-ensure t)
 
