@@ -1,21 +1,36 @@
-;; ロードパスを追加する関数を定義
-(defun add-to-load-path (&rest paths)
-  (let (path)
-    (dolist (path paths paths)
-      (let ((default-directory
-	            (expand-file-name (concat user-emacs-directory path))))
-	(add-to-list 'load-path default-directory)
-	(if (fboundp 'normal-top-level-add-subdirs-to-load-path)
-	        (normal-top-level-add-subdirs-to-load-path))))))
-;; 引数のディレクトリとそのサブディレクトリをload-pathに追加
-(add-to-load-path "elisp" "inits")
+;; パッケージ管理 (package.el) と use-package の初期設定
+;; package.el の初期化
+(require 'package)
 
-;; init-loader
-(require 'init-loader)
+;; パッケージリポジトリを追加
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
-;; ログファイルを表示(nil にすると非表示)
-(custom-set-variables
- '(init-loader-show-log-after-init nil))
+;; パッケージリストを初期化
+(package-initialize)
 
-;; 設定ディレクトリ
-(init-loader-load "~/.emacs.d/inits")
+;; use-package を有効にする
+;; (setq use-package-always-ensure t) を設定すると、
+;; use-packageで指定したパッケージが未インストールの場合、自動でインストールされます。
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+;; ファイルを読み込む
+(load (expand-file-name "inits/00_vertico.el" user-emacs-directory))
+(load (expand-file-name "inits/00_inits.el" user-emacs-directory))
+(load (expand-file-name "inits/00_color.el" user-emacs-directory))
+(load (expand-file-name "inits/10_git.el" user-emacs-directory))
+(load (expand-file-name "inits/20_lang-c.el" user-emacs-directory))
+(load (expand-file-name "inits/20_lang-css.el" user-emacs-directory))
+(load (expand-file-name "inits/20_lang-diff.el" user-emacs-directory))
+(load (expand-file-name "inits/20_lang-html.el" user-emacs-directory))
+(load (expand-file-name "inits/20_lang-js.el" user-emacs-directory))
+(load (expand-file-name "inits/20_lang-md.el" user-emacs-directory))
+(load (expand-file-name "inits/20_lang-perl.el" user-emacs-directory))
+(load (expand-file-name "inits/20_lang-php.el" user-emacs-directory))
+(load (expand-file-name "inits/20_lang-python.el" user-emacs-directory))
+(load (expand-file-name "inits/20_lang-ruby.el" user-emacs-directory))
+(load (expand-file-name "inits/20_lang-yaml.el" user-emacs-directory))
+
+
+;; --- ここからテスト用
