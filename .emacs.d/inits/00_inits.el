@@ -6,8 +6,8 @@
   :init
   ;;;; 表示関係 (GUI起動時のみ適用)
   (when (display-graphic-p)
-    (setq initial-frame-alist '((top . 1) (left . 1) (width . 160) (height . 52))))
-  ;; (tool-bar-mode -1)
+    (setq initial-frame-alist '((top . 1) (left . 1) (width . 160) (height . 52)))
+    (tool-bar-mode -1))
   (menu-bar-mode -1)
   (setq scroll-conservatively 20
         scroll-margin 2
