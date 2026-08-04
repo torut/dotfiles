@@ -1,5 +1,9 @@
 # users generic .zshrc file for zsh(1)
 #
+# history の保存件数。変更したい場合はここを編集する。
+HISTSIZE=50000
+SAVEHIST=50000
+
 # 機能別に .zsh.d/ 以下へ分割している。ファイル名先頭の2桁の数字が読み込み順。
 for zshrc_part in ${HOME}/.zsh.d/[0-9][0-9]_*.zsh(N); do
   source "$zshrc_part"
