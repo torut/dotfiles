@@ -1,13 +1,21 @@
 ;; magit
-(require 'magit)
+(use-package magit
+  :ensure t
+  :hook (magit-mode .
+                  (lambda ()
+                    ;; 'all'ではなく t にすると現在選択中のhunkのみを強調表示する
+                    (setq magit-diff-refine-hunk t)
+					(setq magit-status-show-untracked-files 'all)
 
-;; magit の diff モードの設定
-(defun magit-setup-diff ()
-  ;; 'allではなくtにすると現在選択中のhunkのみ強調表示する
-  (setq magit-diff-refine-hunk t)
-  ;; diff用のfaceを設定する
-  (diff-mode-setup-faces)
-  ;; diffの表示設定が上書きされてしまうのでハイライトを無効にする
-  (set-face-attribute 'magit-item-highlight nil :inherit nil)
+                    ;; diff用のfaceを設定する
+                    ;; NOTE: この `diff-mode-setup-faces` 関数は、
+                    ;;       `20_mode-diff.el` などで定義されている必要があります。
+                    (when (fboundp 'diff-mode-setup-faces)
+                      (diff-mode-setup-faces))
+
+                    ;; diffの表示設定が上書きされてしまうのでハイライトを無効にする
+                    (set-face-attribute 'magit-section-highlight nil :inherit nil))
+
+				  )
+
   )
-(add-hook 'magit-mode-hook 'magit-setup-diff)

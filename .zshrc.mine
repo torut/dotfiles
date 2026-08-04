@@ -2,8 +2,13 @@ if [ -d "/usr/local/opt/coreutils/libexec/gnubin" ]; then
 	PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
 
-if [ -f ${HOME}/.zsh.d/git-completion.bash ]; then
-	source ${HOME}/.zsh.d/git-completion.bash
+# _git は fpath 経由の autoload で読み込む (source すると補完コンテキスト外で
+# 即時実行されエラーになるため。git-completion.bash は _git と同じディレクトリから
+# 自動的に見つけられる)
+if [ -f ${HOME}/.zsh.d/_git ]; then
+	fpath=(${HOME}/.zsh.d $fpath)
+	autoload -Uz _git
+	compdef _git git
 fi
 
 if [ -f ${HOME}/.zsh.d/git-prompt.zsh ]; then
