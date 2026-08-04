@@ -31,6 +31,6 @@ p10k自身がgit状態(staged/untracked/ahead-behind等)込みのプロンプト
 持っているため、両方生かすと二重描画で衝突する。
 
 また、p10kの「instant prompt」機能はほぼ`.zshrc`の最上部で読み込むことを
-前提にしており、今の「番号順に`.zsh.d/`を読み込む」設計とは順序面で
-相性が悪い。instant promptを活かすには番号ローダーより先に置く特別扱いが
-必要になる。
+前提にしている。`.zshrc`は`.zsh.d/`の読み込みをforループでのファイル名
+パターン一致から明示的な`source`の列挙に変更済みなので、instant prompt用の
+行を`.zsh.d/00_locale.zsh`より前に1行差し込むだけで対応できる。
