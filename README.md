@@ -43,5 +43,5 @@ $ ln -s dotfiles/.tmux.conf.d ~/.tmux.conf.d
 
 ## ZShell
 
-`.zshrc.mine` を使う場合はZShellのPCRE拡張が必要.
+(過去は`.zsh.d/git-prompt.zsh`がPCRE拡張を要求していたが、該当のデッドコードを削除したため現在は不要)
 
