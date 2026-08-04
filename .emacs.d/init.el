@@ -27,6 +27,11 @@
 
   ;; Emacs 27.1 以降: use-package + vertico 構成
   (progn
+    ;; use-package は Emacs 29 以降のみ本体組み込み。
+    ;; 27.1/28系では未インストールの場合に package.el 経由で導入する。
+    (unless (package-installed-p 'use-package)
+      (package-refresh-contents)
+      (package-install 'use-package))
     (require 'use-package)
     (setq use-package-always-ensure t)
 
