@@ -25,12 +25,21 @@ gitignoreは `.gitignore` はこのリポジトリの.gitignoreなので、利�
 $ ln -s dotfiles/gitignore ~/.gitignore
 ```
 
+## tmux
+
+`.tmux.conf`はtmuxのバージョンで読み込む設定を自動的に切り替える(`if-shell`によるバージョン判定).
+
+- tmux 2.9以降: `.tmux.conf.d/2.9-and-later.conf` (`-style`系オプション、ペインのディレクトリ引き継ぎ対応)
+- tmux 2.9未満: `.tmux.conf.d/pre-2.9.conf` (`-fg`/`-bg`/`-attr`系オプション)
+
+tmux 2.9で`-fg`/`-bg`/`-attr`系オプションが削除され`-style`に統合されたための分岐. `.tmux.conf`と`.tmux.conf.d/`をあわせてシンボリックリンクする.
+
+```
+$ ln -s dotfiles/.tmux.conf ~/.tmux.conf
+$ ln -s dotfiles/.tmux.conf.d ~/.tmux.conf.d
+```
+
 ## ZShell
 
 `.zshrc.mine` を使う場合はZShellのPCRE拡張が必要.
-
-
-## tmux
-
-バージョンが2.9以上の場合は `.tmux.up_2_9.conf` を使う.
 
