@@ -4,10 +4,6 @@
 
 ## Emacs
 
-バージョン29以降用.
-それ以前は master ブランチを参照.
-
-
 `.emacs.d/init.el` はEmacsのバージョンで読み込む設定を自動的に切り替える.
 
 - Emacs 29.1以降: `.emacs.d/inits/` (use-package + vertico/consult/marginalia/orderless構成)
@@ -23,6 +19,12 @@ gitignoreは `.gitignore` はこのリポジトリの.gitignoreなので、利�
 
 ```
 $ ln -s dotfiles/gitignore ~/.gitignore
+```
+
+.gitconfigは `.gitconfig.d` も参照するので同じ用にシンボリックリンクする.
+```
+$ ln -s dotfiles/.gitconfig.d ~/.gitconfig.d
+$ ln -s dotfiles/.gitconfig ~/.gitconfig
 ```
 
 ## tmux
@@ -44,4 +46,6 @@ $ ln -s dotfiles/.tmux.conf.d ~/.tmux.conf.d
 ## ZShell
 
 (過去は`.zsh.d/git-prompt.zsh`がPCRE拡張を要求していたが、該当のデッドコードを削除したため現在は不要)
+
+端末固有の設定を行う場合は `.zshrc.local` を $HOME ディレクトリに準備すると自動的に読み込む.
 
