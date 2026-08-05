@@ -20,3 +20,8 @@ source ${HOME}/.zsh.d/80_environment.zsh
 ## load user .zshrc configuration file
 #
 [ -f ${HOME}/.zshrc.mine ] && source ${HOME}/.zshrc.mine
+
+## load local .zshrc configuration file
+#
+[ -f ${HOME}/.zshrc.local ] && source ${HOME}/.zshrc.local
+
