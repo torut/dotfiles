@@ -1,3 +1,6 @@
+[include]
+	path = ~/.gitconfig.d/delta-themes.gitconfig
+
 [core]
 	editor = emacs
 	page = "less -r"
@@ -6,16 +9,16 @@
 	autocrlf = false
 
 [delta]
-  true-color = always
-  syntax-theme = Dracula
-  line-numbers = true
-  wrap = true
-  # 以下はダークモード
-  dark = true
-  light = false
-  # 以下はライトモード
-  # dark = false
-  # light = true
+	features = mantis-shrimp
+	# 以下はmantis-shrimpの設定を上書き
+	side-by-side = false
+	commit-decoration-style = None
+	commit-style = raw
+	hunk-header-decoration-style = None
+	hunk-header-style = file line-number
+	syntax-theme = Dracula
+	line-numbers-left-format = "{nm:>3}|"
+	line-numbers-right-format = "{np:>3}|"
 
 [user]
 	name = Toru TAMURA
