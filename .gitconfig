@@ -37,20 +37,19 @@
 	pl = pull
 	s = show
 	l = log --date=iso --format=medium
-	ls = log --name-status
-	history = log --graph --all --date=iso --pretty=format:'%C(green)%h%C(reset) %C(cyan)%cd%C(reset) %cn %C(red)%d%C(reset) %C(white bold)%s%C(reset)'
-	history-stat = log --graph --all --stat --pretty=format:'%C(cyan)%ad%C(reset) %C(magenta)%cn%C(reset) %C(green)%h%C(reset)%n%C(red)%d%C(reset)%n%C(white bold)%s%C(reset)%n'
+	ls = log --date=iso --name-status
+	history = log --graph --date=iso --pretty=format:'%C(green)%h%C(reset) %C(cyan)%cd%C(reset) %cn %C(red)%d%C(reset) %C(white bold)%s%C(reset)'
+	history-stat = log --graph --date=iso --stat --pretty=format:'%C(cyan)%ad%C(reset) %C(magenta)%cn%C(reset) %C(green)%h%C(reset)%n%C(red)%d%C(reset)%n%C(white bold)%s%C(reset)%n'
 	h  = !git history
 	hs = !git history-stat
-	export = archive --format=tar HEAD^{tree}
+	h-all  = !git history --all
+	hs-all = !git history-stat --all
 	cherry-pick = cherry-pick --no-commit
 	cpn = cherry-pick --no-commit
 	graph = log --graph --oneline --decorate --all
 	newbranch = checkout -b
-	nb = checkout -b
+	nb = !git newbranch
 
-	develop = checkout develop
-	master = checkout master
 	svn-up = svn rebase
 	svn-commit = svn dcommit
 	svn-ci = !git svn-commit
@@ -87,17 +86,6 @@
 
 [merge]
 	ff = false					# later of 1.7.6
-
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-
-[tig "bind"]
-  generic = g move-first-line
-  generic = G move-last-line
 
 [filter "media"]
 	clean = git-media-clean %f
