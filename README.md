@@ -2,6 +2,26 @@
 
 それぞれ $HOME ディレクトリでシンボリックリンクを張るなどして使う.
 
+## Claude Code
+
+[dotfiles/.claude](./.claude) 以下にあるものをそれぞれでシンボリックリンクで利用
+
+### プラグイン
+
+- [claude-code-starter-kit](https://github.com/cloudnative-co/claude-code-starter-kit)
+    - 最優先でインストール.
+    - Standardプロファイルを利用.
+
+- [agent-plugins](https://github.com/awslabs/agent-plugins/blob/main/README.jp.md)
+    - deploy-on-aws: コスト見積やアーキテクチャ検討、構成図生成ができる.
+
+### ツール
+
+- [ccstatusline](https://github.com/sirmalloc/ccstatusline)
+    - ステータスラインの表示の設定ツール.
+    - 設定ファイルは `.config/ccstatusline/settings.json` を利用する.
+
+
 ## Emacs
 
 `.emacs.d/init.el` はEmacsのバージョンで読み込む設定を自動的に切り替える.
