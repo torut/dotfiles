@@ -42,3 +42,26 @@
   (setq savehist-additional-variables
         '(search-ring
           regexp-search-ring)))
+
+(defun my-consult--command-items ()
+  "利用可能なすべての対話的コマンドのリストを取得します。"
+  (let (cmds)
+    (mapatoms
+     (lambda (sym)
+       (when (commandp sym)
+         (push (symbol-name sym) cmds))))
+	(sort cmds #'string-lessp)
+    ))
+
+(defvar my-consult--source-command
+  `(:name     "Command"
+    :narrow   ?x
+    :category command
+    :history  command-history
+    :items    ,#'my-consult--command-items
+    :action   ,(lambda (cmd)
+                 (command-execute (intern cmd)))))
+
+;; consult-buffer のソース一覧に追加
+(with-eval-after-load 'consult
+  (add-to-list 'consult-buffer-sources 'my-consult--source-command 'append))
