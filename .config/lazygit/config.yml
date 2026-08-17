@@ -1,0 +1,9 @@
+gui:
+  nerdFontsVersion: "3"
+git:
+  diffRenderers:
+    - colorArg: always
+      command: delta --dark --paging=never
+  branchLogCmd: git log --graph --date=iso --color=always --pretty=format:'%C(green)%h%C(reset) %C(cyan)%cd%C(reset) %cn %C(red)%d%C(reset) %C(white bold)%s%C(reset)'
+  allBranchesLogCmds:
+    - git log --graph --date=iso --color=always --pretty=format:'%C(green)%h%C(reset) %C(cyan)%cd%C(reset) %cn %C(red)%d%C(reset) %C(white bold)%s%C(reset)' --
