@@ -12,6 +12,7 @@
   (setq scroll-conservatively 20
         scroll-margin 2
         scroll-step 1)
+  (column-number-mode 1) ; モードラインに列番号(何文字目)も表示
 
   ;;;; 基本的な編集設定
   (setq line-move-visual nil) ; 論理行単位での移動
