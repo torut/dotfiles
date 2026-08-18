@@ -62,8 +62,7 @@
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
 ;; 1行78文字とする
-(setq fill-column 78)
-(setq auto-fill-mode t)	;; M-q で78文字で整形できるようにする
+(setq-default fill-column 78)
 
 ;; 行番号を表示する
 (require 'linum)

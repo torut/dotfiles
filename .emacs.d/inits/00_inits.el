@@ -15,8 +15,7 @@
 
   ;;;; 基本的な編集設定
   (setq line-move-visual nil) ; 論理行単位での移動
-  (setq fill-column 78)
-  (add-hook 'text-mode-hook #'auto-fill-mode) ; テキストモードでのみ auto-fill を有効化
+  (setq-default fill-column 78)
   (setq next-line-add-newlines nil) ; バッファ末尾の自動改行を無効化
 
   ;;;; 日本語環境とエンコーディング
@@ -72,9 +71,9 @@
 ;; 行番号表示 (linum-mode の後継)
 (use-package display-line-numbers
   :ensure nil
-  :hook (prog-mode . display-line-numbers-mode) ; プログラミングモードでのみ有効化
   :config
-  (setq display-line-numbers-width 4))
+  (setq display-line-numbers-width 4)
+  (global-display-line-numbers-mode 1)) ; モードによらず全バッファで有効化
 
 ;; 自動補完 (auto-complete)
 ;; NOTE: corfu への移行を検討
