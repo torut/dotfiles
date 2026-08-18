@@ -44,7 +44,6 @@
 	hs = !git history-stat
 	h-all  = !git history --all
 	hs-all = !git history-stat --all
-	cherry-pick = cherry-pick --no-commit
 	cpn = cherry-pick --no-commit
 	graph = log --graph --oneline --decorate --all
 	newbranch = checkout -b
