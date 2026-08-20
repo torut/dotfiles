@@ -63,6 +63,46 @@ $ ln -s dotfiles/.tmux.conf ~/.tmux.conf
 $ ln -s dotfiles/.tmux.conf.d ~/.tmux.conf.d
 ```
 
+### Claude Codeの入力待ち表示
+
+`.tmux.conf.d/2.9-and-later.conf`の`window-status-format`/`window-status-current-format`は,
+windowスコープのuser option `@claude_waiting` が `1` のウィンドウにだけ `!` マーカーを表示する
+(`automatic-rename`と衝突するウィンドウ名の書き換えは行わない).
+
+このoptionは[.claude/hooks/tmux-hooks/set-waiting.sh](./.claude/hooks/tmux-hooks/set-waiting.sh)が
+`tmux set-window-option -t "$TMUX_PANE" @claude_waiting 0|1` で更新する. スクリプト自体は
+`.claude`以下のシンボリックリンク運用に含まれるが, `~/.claude/settings.json`はdotfiles管理外
+(個人設定のため)なので, 以下の`hooks`エントリを手動で追記する必要がある(パスは配置環境に合わせる).
+既存の`hooks`エントリがある場合は置き換えず, 各イベントの配列に追加すること.
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "~/.claude/hooks/tmux-hooks/set-waiting.sh 0" }] }
+    ],
+    "UserPromptSubmit": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "~/.claude/hooks/tmux-hooks/set-waiting.sh 0" }] }
+    ],
+    "Notification": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "~/.claude/hooks/tmux-hooks/set-waiting.sh 1" }] }
+    ],
+    "Stop": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "~/.claude/hooks/tmux-hooks/set-waiting.sh 1" }] }
+    ],
+    "SessionStart": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "~/.claude/hooks/tmux-hooks/set-waiting.sh 0" }] }
+    ],
+    "SessionEnd": [
+      { "matcher": "*", "hooks": [{ "type": "command", "command": "~/.claude/hooks/tmux-hooks/set-waiting.sh 0" }] }
+    ]
+  }
+}
+```
+
+- `PreToolUse`(全ツール)/`UserPromptSubmit`/`SessionStart`/`SessionEnd`: 処理再開・セッション境界で `0`(解除)
+- `Notification`(権限確認・アイドル通知)/`Stop`(応答完了): `1`(入力待ちマーカーON)
+
 ## ZShell
 
 (過去は`.zsh.d/git-prompt.zsh`がPCRE拡張を要求していたが、該当のデッドコードを削除したため現在は不要)
