@@ -16,7 +16,7 @@
 
   ;;;; 基本的な編集設定
   (setq line-move-visual nil) ; 論理行単位での移動
-  (setq-default fill-column 78)
+  ;; (setq-default fill-column 78)
   (setq next-line-add-newlines nil) ; バッファ末尾の自動改行を無効化
 
   ;;;; 日本語環境とエンコーディング
