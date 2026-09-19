@@ -14,6 +14,7 @@
 
 - [agent-plugins](https://github.com/awslabs/agent-plugins/blob/main/README.jp.md)
     - deploy-on-aws: コスト見積やアーキテクチャ検討、構成図生成ができる.
+    - [MEMO.md](./MEMO.md)を参照してuvやAWS-CLIをインストール.
 
 ### ツール
 
