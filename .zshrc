@@ -16,6 +16,7 @@ source ${HOME}/.zsh.d/50_completion.zsh
 source ${HOME}/.zsh.d/60_alias.zsh
 source ${HOME}/.zsh.d/70_terminal.zsh
 source ${HOME}/.zsh.d/80_environment.zsh
+source ${HOME}/.zsh.d/90_function.zsh
 
 ## load user .zshrc configuration file
 #
